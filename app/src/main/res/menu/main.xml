@@ -1,0 +1,14 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".MainActivity" >
+
+    <item android:id="@+id/action_view_location_on_map"
+        android:title="@string/action_view_location_on_map"
+        android:showAsAction="never" />
+
+    <item android:id="@+id/action_settings"
+        android:title="@string/title_activity_settings"
+        android:orderInCategory="100"
+        android:showAsAction="never" />
+
+</menu>
