@@ -25,9 +25,6 @@ import uk.co.latestarter.sunshine.data.WeatherContract;
 import uk.co.latestarter.sunshine.data.WeatherContract.LocationEntry;
 import uk.co.latestarter.sunshine.data.WeatherContract.WeatherEntry;
 
-/**
- * Created by Aswin Asokan on 31/07/2014.
- */
 public class FetchWeatherTask extends AsyncTask<String, Void, Void> {
 
     private final String LOG_TAG = FetchWeatherTask.class.getSimpleName();
@@ -46,7 +43,7 @@ public class FetchWeatherTask extends AsyncTask<String, Void, Void> {
             return null;
         }
 
-        String locationQuery = params[0];
+        String locationSetting = params[0];
 
         /*
         These two need to be declared outside the try/catch
@@ -75,7 +72,7 @@ public class FetchWeatherTask extends AsyncTask<String, Void, Void> {
             final String DAYS_PARAM = "cnt";
 
             Uri builtUri = Uri.parse(BASE_URL).buildUpon()
-                    .appendQueryParameter(QUERY_PARAM, locationQuery)
+                    .appendQueryParameter(QUERY_PARAM, locationSetting)
                     .appendQueryParameter(FORMAT_PARAM, format)
                     .appendQueryParameter(UNITS_PARAM, units)
                     .appendQueryParameter(DAYS_PARAM, Integer.toString(days))
@@ -91,7 +88,7 @@ public class FetchWeatherTask extends AsyncTask<String, Void, Void> {
 
             // Read the input stream into a String
             InputStream inputStream = urlConnection.getInputStream();
-            StringBuffer buffer = new StringBuffer();
+            StringBuilder buffer = new StringBuilder();
             if (inputStream == null) {
                 // Nothing to do.
                 Log.e(LOG_TAG, "NULL inputStream");
@@ -101,12 +98,13 @@ public class FetchWeatherTask extends AsyncTask<String, Void, Void> {
 
             String line;
             while ((line = reader.readLine()) != null) {
-                    /*
-                    Since it's JSON, adding a newline isn't necessary (it won't affect parsing)
-                    But it does make debugging a *lot* easier if you print out the completed
-                    buffer for debugging.
-                    */
-                buffer.append(line + "\n");
+                buffer.append(line);
+                /*
+                Since it's JSON, adding a newline isn't necessary (it won't affect parsing)
+                But it does make debugging a *lot* easier if you print out the completed
+                buffer for debugging.
+                */
+                buffer.append("\n");
             }
 
             if (buffer.length() == 0) {
@@ -136,14 +134,14 @@ public class FetchWeatherTask extends AsyncTask<String, Void, Void> {
         }
 
         try {
-            getWeatherDataFromJson(forecastJsonStr, days, locationQuery);
+            getWeatherDataFromJson(forecastJsonStr, locationSetting);
         } catch (JSONException e) {
             Log.e(LOG_TAG, e.getMessage(), e);
         }
         return null;
     }
 
-    private void getWeatherDataFromJson(String forecastJsonStr, int numDays, String locationSetting)
+    private void getWeatherDataFromJson(String forecastJsonStr, String locationSetting)
             throws JSONException {
 
         // These are the names of the JSON objects that need to be extracted.

@@ -22,12 +22,9 @@ import android.widget.TextView;
 import java.util.Date;
 
 import uk.co.latestarter.sunshine.data.WeatherContract;
-import uk.co.latestarter.sunshine.data.WeatherContract.WeatherEntry;
 import uk.co.latestarter.sunshine.data.WeatherContract.LocationEntry;
+import uk.co.latestarter.sunshine.data.WeatherContract.WeatherEntry;
 
-/**
- * Created by Aswin Asokan on 18/07/2014.
- */
 public class ForecastFragment extends Fragment implements LoaderManager.LoaderCallbacks<Cursor> {
 
     private static final int FORECAST_LOADER = 0;
@@ -54,12 +51,12 @@ public class ForecastFragment extends Fragment implements LoaderManager.LoaderCa
 
     // These indices are tied to FORECAST_COLUMNS.  If FORECAST_COLUMNS changes, these
     // must change.
-    public static final int COL_WEATHER_ID = 0;
+//    public static final int COL_WEATHER_ID = 0;
     public static final int COL_WEATHER_DATE = 1;
-    public static final int COL_WEATHER_DESC = 2;
+//    public static final int COL_WEATHER_DESC = 2;
     public static final int COL_WEATHER_MAX_TEMP = 3;
     public static final int COL_WEATHER_MIN_TEMP = 4;
-    public static final int COL_LOCATION_SETTING = 5;
+//    public static final int COL_LOCATION_SETTING = 5;
 
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {

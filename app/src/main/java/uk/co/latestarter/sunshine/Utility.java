@@ -10,9 +10,6 @@ import java.util.Date;
 
 import uk.co.latestarter.sunshine.data.WeatherContract;
 
-/**
- * Created by Aswin Asokan on 31/07/2014.
- */
 public class Utility {
 
     public static String getPreferredLocation(Context context) {

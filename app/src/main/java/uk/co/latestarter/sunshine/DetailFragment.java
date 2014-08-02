@@ -14,24 +14,17 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ListView;
 import android.widget.ShareActionProvider;
-import android.widget.SimpleCursorAdapter;
 import android.widget.TextView;
 
 import uk.co.latestarter.sunshine.data.WeatherContract.WeatherEntry;
 
-/**
- * Created by Aswin Asokan on 01/08/2014.
- */
 public class DetailFragment extends Fragment implements LoaderManager.LoaderCallbacks<Cursor> {
 
     private static final int DETAIL_LOADER = 0;
     private String mWeatherDate;
-    private String mlocation;
+    private String mLocation;
     private String mForecastStr;
-
-    private SimpleCursorAdapter mDetailAdapter;
 
     // For the forecast view we're showing only a small subset of the stored data.
     // Specify the columns we need.
@@ -46,14 +39,14 @@ public class DetailFragment extends Fragment implements LoaderManager.LoaderCall
             WeatherEntry.COLUMN_DATETEXT,
             WeatherEntry.COLUMN_SHORT_DESC,
             WeatherEntry.COLUMN_MAX_TEMP,
-            WeatherEntry.COLUMN_MIN_TEMP,
+            WeatherEntry.COLUMN_MIN_TEMP
     };
 
     @Override
     public void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
-        if (null != mlocation) {
-            outState.putString(getString(R.string.pref_location_key), mlocation);
+        if (null != mLocation) {
+            outState.putString(getString(R.string.pref_location_key), mLocation);
         }
     }
 
@@ -61,7 +54,7 @@ public class DetailFragment extends Fragment implements LoaderManager.LoaderCall
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         if (null != savedInstanceState) {
-            mlocation = savedInstanceState.getString(getString(R.string.pref_location_key));
+            mLocation = savedInstanceState.getString(getString(R.string.pref_location_key));
         }
 
         getLoaderManager().initLoader(DETAIL_LOADER, null, this);
@@ -70,7 +63,7 @@ public class DetailFragment extends Fragment implements LoaderManager.LoaderCall
     @Override
     public void onResume() {
         super.onResume();
-        if (null != mlocation && !mlocation.equals(Utility.getPreferredLocation(getActivity()))) {
+        if (null != mLocation && !mLocation.equals(Utility.getPreferredLocation(getActivity()))) {
             getLoaderManager().restartLoader(DETAIL_LOADER, null, this);
         }
     }
@@ -95,10 +88,7 @@ public class DetailFragment extends Fragment implements LoaderManager.LoaderCall
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-
-        View rootView = inflater.inflate(R.layout.fragment_detailed_weather, container, false);
-
-        return rootView;
+        return  inflater.inflate(R.layout.fragment_detailed_weather, container, false);
     }
 
     private Intent createShareForecastIntent() {
@@ -133,8 +123,8 @@ public class DetailFragment extends Fragment implements LoaderManager.LoaderCall
         mWeatherDate = intent.getStringExtra(DetailActivity.DATE_KEY);
 
         // Filter the query to return weather only for selected date and location
-        mlocation = Utility.getPreferredLocation(getActivity());
-        Uri weatherForLocationUri = WeatherEntry.buildWeatherLocationWithDate(mlocation, mWeatherDate);
+        mLocation = Utility.getPreferredLocation(getActivity());
+        Uri weatherForLocationUri = WeatherEntry.buildWeatherLocationWithDate(mLocation, mWeatherDate);
 
         // Now create and return a CursorLoader that will take care of
         // creating a Cursor for the data being displayed.
@@ -154,17 +144,19 @@ public class DetailFragment extends Fragment implements LoaderManager.LoaderCall
             return;
         }
 
-        String dateString = Utility.formatDate(data.getString(data.getColumnIndex(WeatherEntry.COLUMN_DATETEXT)));
+        String dateString = formatDate(data.getString(data.getColumnIndex(WeatherEntry.COLUMN_DATETEXT)));
         String weatherDescription = data.getString(data.getColumnIndex(WeatherEntry.COLUMN_SHORT_DESC));
 
-        boolean isMetric = Utility.isMetric(getActivity());
-        String high = Utility.formatTemperature(data.getDouble(data.getColumnIndex(WeatherEntry.COLUMN_MAX_TEMP)), isMetric);
-        String low = Utility.formatTemperature(data.getDouble(data.getColumnIndex(WeatherEntry.COLUMN_MIN_TEMP)), isMetric);
+        String high = formatTemperature(data.getDouble(data.getColumnIndex(WeatherEntry.COLUMN_MAX_TEMP)));
+        String low = formatTemperature(data.getDouble(data.getColumnIndex(WeatherEntry.COLUMN_MIN_TEMP)));
 
-        ((TextView) getView().findViewById(R.id.detail_date_textview)).setText(dateString);
-        ((TextView) getView().findViewById(R.id.detail_description_textview)).setText(weatherDescription);
-        ((TextView) getView().findViewById(R.id.detail_high_textview)).setText(high + "\u00B0");
-        ((TextView) getView().findViewById(R.id.detail_low_textview)).setText(low + "\u00B0");
+        View view = getView();
+        if (null != view) {
+            ((TextView) view.findViewById(R.id.detail_date_textview)).setText(dateString);
+            ((TextView) view.findViewById(R.id.detail_description_textview)).setText(weatherDescription);
+            ((TextView) view.findViewById(R.id.detail_high_textview)).setText(high + "\u00B0");
+            ((TextView) view.findViewById(R.id.detail_low_textview)).setText(low + "\u00B0");
+        }
 
         mForecastStr = String.format("%s - %s - %s/%s", dateString, weatherDescription, high, low);
     }
