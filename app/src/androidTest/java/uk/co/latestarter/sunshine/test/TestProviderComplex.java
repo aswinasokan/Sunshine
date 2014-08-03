@@ -4,17 +4,11 @@ import android.content.ContentUris;
 import android.content.ContentValues;
 import android.database.Cursor;
 import android.net.Uri;
-import android.test.AndroidTestCase;
 
-import uk.co.latestarter.sunshine.data.WeatherContract.WeatherEntry;
 import uk.co.latestarter.sunshine.data.WeatherContract.LocationEntry;
+import uk.co.latestarter.sunshine.data.WeatherContract.WeatherEntry;
 
-/**
- * Created by UK-C-aasokan on 31/07/2014.
- */
 public class TestProviderComplex extends TestProvider {
-    public static final String LOG_TAG = TestProviderComplex.class.getSimpleName();
-
     static final String KALAMAZOO_LOCATION_SETTING = "kalamazoo";
     static final String KALAMAZOO_WEATHER_START_DATE = "20140625";
 

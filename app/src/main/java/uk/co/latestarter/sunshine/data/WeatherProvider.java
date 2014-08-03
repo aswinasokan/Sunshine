@@ -10,11 +10,6 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteQueryBuilder;
 import android.net.Uri;
 
-import uk.co.latestarter.sunshine.Utility;
-
-/**
- * Created by Aswin Asokan on 29/07/2014.
- */
 public class WeatherProvider extends ContentProvider {
 
     private static final int WEATHER = 100;

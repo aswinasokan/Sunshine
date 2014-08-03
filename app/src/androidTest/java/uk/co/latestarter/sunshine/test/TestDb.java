@@ -14,9 +14,6 @@ import uk.co.latestarter.sunshine.data.WeatherContract.LocationEntry;
 import uk.co.latestarter.sunshine.data.WeatherContract.WeatherEntry;
 import uk.co.latestarter.sunshine.data.WeatherDbHelper;
 
-/**
- * Created by Aswin Asokan on 28/07/2014.
- */
 public class TestDb extends AndroidTestCase {
     public static final String LOG_TAG = TestDb.class.getSimpleName();
     public static final String TEST_CITY_NAME = "North Pole";

@@ -9,11 +9,7 @@ import android.util.Log;
 
 import uk.co.latestarter.sunshine.data.WeatherContract.LocationEntry;
 import uk.co.latestarter.sunshine.data.WeatherContract.WeatherEntry;
-import uk.co.latestarter.sunshine.data.WeatherDbHelper;
 
-/**
- * Created by Aswin Asokan on 28/07/2014.
- */
 public class TestProvider extends AndroidTestCase {
     public static final String LOG_TAG = TestProvider.class.getSimpleName();
 

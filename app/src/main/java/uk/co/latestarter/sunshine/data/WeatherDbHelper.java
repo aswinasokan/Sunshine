@@ -7,9 +7,6 @@ import android.database.sqlite.SQLiteOpenHelper;
 import uk.co.latestarter.sunshine.data.WeatherContract.LocationEntry;
 import uk.co.latestarter.sunshine.data.WeatherContract.WeatherEntry;
 
-/**
- * Created by Aswin Asokan on 27/07/2014.
- */
 public class WeatherDbHelper extends SQLiteOpenHelper {
 
     // If you change the database schema, you must increment the database version.

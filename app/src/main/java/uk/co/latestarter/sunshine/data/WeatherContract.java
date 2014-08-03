@@ -1,8 +1,5 @@
 package uk.co.latestarter.sunshine.data;
 
-/**
- * Created by Aswin Asokan on 27/07/2014.
- */
 import android.content.ContentUris;
 import android.net.Uri;
 import android.provider.BaseColumns;
@@ -120,7 +117,7 @@ public class WeatherContract {
         // Humidity is stored as a float representing percentage
         public static final String COLUMN_PRESSURE = "pressure";
 
-        // Windspeed is stored as a float representing windspeed  mph
+        // WindSpeed is stored as a float representing windspeed  mph
         public static final String COLUMN_WIND_SPEED = "wind";
 
         // Degrees are meteorological degrees (e.g, 0 is north, 180 is south).  Stored as floats.
