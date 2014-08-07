@@ -29,7 +29,7 @@ public class FetchWeatherTask extends AsyncTask<String, Void, Void> {
 
     private final String LOG_TAG = FetchWeatherTask.class.getSimpleName();
 
-    private Context mContext;
+    private final Context mContext;
 
     public FetchWeatherTask(Context context) {
         mContext = context;

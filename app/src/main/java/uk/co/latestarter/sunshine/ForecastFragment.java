@@ -95,7 +95,7 @@ public class ForecastFragment extends Fragment implements LoaderManager.LoaderCa
         // ListView displaying the forecast
         ListView listView = (ListView) rootView.findViewById(R.id.listView_forecast);
 
-        mForecastAdapter = new ForecastAdapter(getActivity(), null, 0);
+        mForecastAdapter = new ForecastAdapter(getActivity());
 
         // Attach the custom adapter to view
         listView.setAdapter(mForecastAdapter);

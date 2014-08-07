@@ -17,8 +17,8 @@ public class ForecastAdapter extends CursorAdapter {
     private final int VIEW_TODAY_LAYOUT = 0;
     private final int VIEW_FUTURE_LAYOUT = 1;
 
-    public ForecastAdapter(Context context, Cursor c, int flags) {
-        super(context, c, flags);
+    public ForecastAdapter(Context context) {
+        super(context, null, 0);
     }
 
     @Override

@@ -22,7 +22,7 @@ public class WeatherProvider extends ContentProvider {
 
     private WeatherDbHelper mOpenHelper;
 
-    private static UriMatcher sUriMatcher = buildUriMatcher();
+    private static final UriMatcher sUriMatcher = buildUriMatcher();
 
     static {
         sWeatherByLocationSettingQueryBuilder = new SQLiteQueryBuilder();

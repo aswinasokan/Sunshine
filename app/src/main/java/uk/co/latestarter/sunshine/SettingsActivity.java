@@ -21,8 +21,6 @@ import uk.co.latestarter.sunshine.data.WeatherContract.WeatherEntry;
 public class SettingsActivity extends PreferenceActivity
         implements Preference.OnPreferenceChangeListener {
 
-    private final String LOG_TAG = SettingsActivity.class.getSimpleName();
-
     private boolean mBindingPreference;
 
     @Override
