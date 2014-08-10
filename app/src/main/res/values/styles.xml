@@ -1,8 +1,31 @@
 <resources>
 
+    <!-- TODO: Change to Material Theme -->
+
     <!-- Base application theme. -->
     <style name="AppTheme" parent="android:Theme.Holo.Light.DarkActionBar">
         <item name="android:choiceMode">none</item>
+        <item name="android:actionBarStyle">@style/ActionBar.Solid.Sunshine</item>
+    </style>
+
+    <style name="ForecastListStyle" parent="AppTheme">
+        <!-- Empty here. Overridden in other configurations to manage selection style -->
+    </style>
+
+    <!-- ActionBar style -->
+    <style name="ActionBar.Solid.Sunshine" parent="android:Widget.Holo.Light.ActionBar.Solid.Inverse">
+        <item name="android:background">@color/sunshine_blue</item>
+    </style>
+
+    <!-- Main activity theme -->
+    <style name="ForecastTheme" parent="AppTheme">
+        <item name="android:actionBarStyle">@style/ActionBar.Solid.Sunshine.NoTitle</item>
+    </style>
+
+    <!-- Main activity action bar style -->
+    <style name="ActionBar.Solid.Sunshine.NoTitle" parent="@style/ActionBar.Solid.Sunshine">
+        <item name="android:displayOptions">useLogo|showHome</item>
+        <item name="android:logo">@drawable/ic_logo</item>
     </style>
 
 </resources>
