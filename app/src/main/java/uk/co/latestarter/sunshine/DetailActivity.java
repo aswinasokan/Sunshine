@@ -13,10 +13,13 @@ public class DetailActivity extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_detailed_weather);
+        setContentView(R.layout.activity_detail_weather);
+
         if (savedInstanceState == null) {
+            String date = getIntent().getStringExtra(DetailActivity.DATE_KEY);
+
             getFragmentManager().beginTransaction()
-                    .add(R.id.container, new DetailFragment())
+                    .add(R.id.weather_detail_container, DetailFragment.getInstance(date))
                     .commit();
         }
     }

@@ -23,7 +23,6 @@ import uk.co.latestarter.sunshine.data.WeatherContract.WeatherEntry;
 public class DetailFragment extends Fragment implements LoaderManager.LoaderCallbacks<Cursor> {
 
     private static final int DETAIL_LOADER = 0;
-    private String mWeatherDate;
     private String mLocation;
     private String mForecastStr;
 
@@ -48,6 +47,20 @@ public class DetailFragment extends Fragment implements LoaderManager.LoaderCall
             WeatherEntry.COLUMN_DEGREES
     };
 
+    public static DetailFragment getInstance(String date) {
+        Bundle bundle = new Bundle();
+        bundle.putString(DetailActivity.DATE_KEY, date);
+
+        DetailFragment fragment = new DetailFragment();
+        fragment.setArguments(bundle);
+        return fragment;
+    }
+
+    private boolean isValidBundle() {
+        Bundle bundle = getArguments();
+        return (null != bundle && bundle.containsKey(DetailActivity.DATE_KEY));
+    }
+
     @Override
     public void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
@@ -63,13 +76,15 @@ public class DetailFragment extends Fragment implements LoaderManager.LoaderCall
             mLocation = savedInstanceState.getString(getString(R.string.pref_location_key));
         }
 
-        getLoaderManager().initLoader(DETAIL_LOADER, null, this);
+        if (isValidBundle()) {
+            getLoaderManager().initLoader(DETAIL_LOADER, null, this);
+        }
     }
 
     @Override
     public void onResume() {
         super.onResume();
-        if (null != mLocation && !mLocation.equals(Utility.getPreferredLocation(getActivity()))) {
+        if (isValidBundle() && null != mLocation && !mLocation.equals(Utility.getPreferredLocation(getActivity()))) {
             getLoaderManager().restartLoader(DETAIL_LOADER, null, this);
         }
     }
@@ -94,7 +109,7 @@ public class DetailFragment extends Fragment implements LoaderManager.LoaderCall
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_detailed_weather, container, false);
+        View view = inflater.inflate(R.layout.fragment_detail_weather, container, false);
         ViewHolder holder = new ViewHolder(view);
         view.setTag(holder);
         return view;
@@ -116,15 +131,11 @@ public class DetailFragment extends Fragment implements LoaderManager.LoaderCall
         // This is called when a new Loader needs to be created.  This
         // fragment only uses one loader, so we don't care about checking the id.
 
-        Intent intent = getActivity().getIntent();
-        if (intent == null || !intent.hasExtra(DetailActivity.DATE_KEY)) {
-            return null;
-        }
-        mWeatherDate = intent.getStringExtra(DetailActivity.DATE_KEY);
+        String weatherDate = getArguments().getString(DetailActivity.DATE_KEY);
 
         // Filter the query to return weather only for selected date and location
         mLocation = Utility.getPreferredLocation(getActivity());
-        Uri weatherForLocationUri = WeatherEntry.buildWeatherLocationWithDate(mLocation, mWeatherDate);
+        Uri weatherForLocationUri = WeatherEntry.buildWeatherLocationWithDate(mLocation, weatherDate);
 
         // Now create and return a CursorLoader that will take care of
         // creating a Cursor for the data being displayed.

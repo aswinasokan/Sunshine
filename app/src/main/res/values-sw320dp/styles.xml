@@ -5,4 +5,8 @@
         <item name="android:choiceMode">none</item>
     </style>
 
+    <style name="ForecastListStyle" parent="AppTheme">
+        <item name="android:choiceMode">singleChoice</item>
+    </style>
+
 </resources>

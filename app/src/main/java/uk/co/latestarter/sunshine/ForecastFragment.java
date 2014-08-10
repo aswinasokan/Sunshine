@@ -3,7 +3,6 @@ package uk.co.latestarter.sunshine;
 import android.app.Fragment;
 import android.app.LoaderManager;
 import android.content.CursorLoader;
-import android.content.Intent;
 import android.content.Loader;
 import android.database.Cursor;
 import android.net.Uri;
@@ -25,10 +24,26 @@ import uk.co.latestarter.sunshine.data.WeatherContract.WeatherEntry;
 
 public class ForecastFragment extends Fragment implements LoaderManager.LoaderCallbacks<Cursor> {
 
+    /**
+     * A callback interface that all activities containing this fragment must
+     * implement. This mechanism allows activities to be notified of item
+     * selections.
+     */
+    public interface Callback {
+        /**
+         * Callback for when an item has been selected.
+         */
+        public void onItemSelected(String date);
+    }
+
     private static final int FORECAST_LOADER = 0;
     private String mLocation;
 
+    private ListView mListView;
     private ForecastAdapter mForecastAdapter;
+    private int mPosition;
+    private final static String SELECTED_KEY = "position_selection";
+    private boolean mUseTodayLayout;
 
     // For the forecast view we're showing only a small subset of the stored data.
     // Specify the columns we need.
@@ -67,7 +82,7 @@ public class ForecastFragment extends Fragment implements LoaderManager.LoaderCa
     @Override
     public void onResume() {
         super.onResume();
-
+        // TODO: When is mLocation used? Check for scenarios
         if (null != mLocation && !mLocation.equals(Utility.getPreferredLocation(getActivity()))) {
             getLoaderManager().restartLoader(FORECAST_LOADER, null, this);
         }
@@ -93,25 +108,29 @@ public class ForecastFragment extends Fragment implements LoaderManager.LoaderCa
         View rootView = inflater.inflate(R.layout.fragment_main, container, false);
 
         // ListView displaying the forecast
-        ListView listView = (ListView) rootView.findViewById(R.id.listView_forecast);
+        mListView = (ListView) rootView.findViewById(R.id.listView_forecast);
 
         mForecastAdapter = new ForecastAdapter(getActivity());
+        mForecastAdapter.setUseTodayLayout(mUseTodayLayout);
 
         // Attach the custom adapter to view
-        listView.setAdapter(mForecastAdapter);
+        mListView.setAdapter(mForecastAdapter);
 
-        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        mListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
                 ForecastAdapter adapter = (ForecastAdapter)adapterView.getAdapter();
                 Cursor cursor =  adapter.getCursor();
                 if (null != cursor && cursor.moveToPosition(position)) {
-                    Intent detailWeatherIntent = new Intent(getActivity(), DetailActivity.class);
-                    detailWeatherIntent.putExtra(DetailActivity.DATE_KEY, cursor.getString(COL_WEATHER_DATE));
-                    startActivity(detailWeatherIntent);
+                    ((Callback)getActivity()).onItemSelected(cursor.getString(COL_WEATHER_DATE));
                 }
+                mPosition = position;
             }
         });
+
+        if (null != savedInstanceState && savedInstanceState.containsKey(SELECTED_KEY)) {
+            mPosition = savedInstanceState.getInt(SELECTED_KEY);
+        }
 
         return rootView;
     }
@@ -129,6 +148,22 @@ public class ForecastFragment extends Fragment implements LoaderManager.LoaderCa
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
+        }
+    }
+
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+
+        if (ListView.INVALID_POSITION != mPosition) {
+            outState.putInt(SELECTED_KEY, mPosition);
+        }
+    }
+
+    public void setUseTodayLayout(boolean useTodayLayout) {
+        mUseTodayLayout = useTodayLayout;
+        if (null != mForecastAdapter) {
+            mForecastAdapter.setUseTodayLayout(mUseTodayLayout);
         }
     }
 
@@ -163,6 +198,11 @@ public class ForecastFragment extends Fragment implements LoaderManager.LoaderCa
     @Override
     public void onLoadFinished(Loader<Cursor> cursorLoader, Cursor data) {
         mForecastAdapter.swapCursor(data);
+
+        // TODO: Trace the usage of this position being set on Orientation change
+        if (ListView.INVALID_POSITION != mPosition) {
+            mListView.setSelection(mPosition);
+        }
     }
 
     @Override

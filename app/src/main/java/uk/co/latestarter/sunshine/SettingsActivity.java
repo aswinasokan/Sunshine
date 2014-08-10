@@ -1,5 +1,6 @@
 package uk.co.latestarter.sunshine;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.preference.ListPreference;
 import android.preference.Preference;
@@ -86,5 +87,13 @@ public class SettingsActivity extends PreferenceActivity
             preference.setSummary(stringValue);
         }
         return true;
+    }
+
+    @Override
+    public Intent getParentActivityIntent() {
+        // If set, and the activity being launched is already running in the current task,
+        // then instead of launching a new instance of that activity, all of the other activities on top of it
+        // will be closed and this Intent will be delivered to the (now on top) old activity as a new Intent
+        return super.getParentActivityIntent().addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
     }
 }

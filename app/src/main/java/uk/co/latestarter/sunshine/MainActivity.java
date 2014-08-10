@@ -8,19 +8,33 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 
-public class MainActivity extends Activity {
+public class MainActivity extends Activity implements ForecastFragment.Callback {
 
     private final String LOG_TAG = MainActivity.class.getSimpleName();
+    private boolean mTwoPane;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        if (savedInstanceState == null) {
-            getFragmentManager().beginTransaction()
-                    .add(R.id.container, new ForecastFragment())
-                    .commit();
+
+        // Check if view has 2 panes
+        if (findViewById(R.id.weather_detail_container) != null) {
+            // Detailed container only for large views (sw600dp)
+            mTwoPane = true;
+
+            // In two pane mode, show detail view in this activity by add/replace the detail fragment
+            if (savedInstanceState == null) {
+                getFragmentManager().beginTransaction()
+                        .replace(R.id.weather_detail_container, new DetailFragment())
+                        .commit();
+            }
+        } else {
+            mTwoPane = false;
         }
+
+        ForecastFragment forecastFragment = ((ForecastFragment)getFragmentManager().findFragmentById(R.id.fragment_forecast));
+        forecastFragment.setUseTodayLayout(!mTwoPane);
     }
 
     @Override
@@ -61,6 +75,21 @@ public class MainActivity extends Activity {
             startActivity(viewOnMapIntent);
         } else {
             Log.e(LOG_TAG, "Couldn't open map to location: " + location + ", no available Intent");
+        }
+    }
+
+    @Override
+    public void onItemSelected(String date) {
+        // If two pane view, then replace the detailed view
+        // If single view, then launch detailed view
+        if (mTwoPane) {
+            getFragmentManager().beginTransaction()
+                    .replace(R.id.weather_detail_container, DetailFragment.getInstance(date))
+                    .commit();
+        } else {
+            Intent detailWeatherIntent = new Intent(this, DetailActivity.class);
+            detailWeatherIntent.putExtra(DetailActivity.DATE_KEY, date);
+            startActivity(detailWeatherIntent);
         }
     }
 }
