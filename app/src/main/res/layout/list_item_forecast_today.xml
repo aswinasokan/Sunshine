@@ -10,8 +10,8 @@
 
     <LinearLayout
         android:orientation="vertical"
-        android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_width="0dp"
         android:layout_weight="7"
         android:layout_marginLeft="60dp">
 
@@ -37,6 +37,7 @@
             android:fontFamily="sans-serif-light"
             android:textSize="36sp"
             android:textColor="@color/white"
+            android:layout_marginLeft="8dp"
             android:id="@+id/list_item_low_textview" />
 
     </LinearLayout>
