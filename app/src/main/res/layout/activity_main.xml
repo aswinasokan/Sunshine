@@ -4,5 +4,5 @@
     android:name="uk.co.latestarter.sunshine.ForecastFragment"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="uk.co.latestarter.sunshine.ForecastFragment"
-    tools:layout="@android:layout/list_content" />
+    tools:context=".MainActivity"
+    tools:layout="@layout/fragment_main" />
