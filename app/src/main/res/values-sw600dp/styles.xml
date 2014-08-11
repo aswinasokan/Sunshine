@@ -4,4 +4,12 @@
         <item name="android:choiceMode">singleChoice</item>
     </style>
 
+    <style name="ListViewLargeSizeText" parent="AppTheme">
+        <item name="android:textSize">20sp</item>
+    </style>
+
+    <style name="ListViewSmallSizeText" parent="AppTheme">
+        <item name="android:textSize">@style/TextAppearance.Micro</item>
+    </style>
+
 </resources>

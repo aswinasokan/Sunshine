@@ -27,14 +27,14 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:fontFamily="sans-serif-condensed"
-            android:textAppearance="?android:textAppearanceLarge"
+            style="@style/ListViewLargeSizeText"
             android:id="@+id/list_item_date_textview"/>
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:fontFamily="sans-serif-condensed"
-            android:textAppearance="?android:textAppearanceSmall"
+            style="@style/ListViewSmallSizeText"
             android:id="@+id/list_item_description_textview" />
     </LinearLayout>
 
@@ -49,7 +49,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
             android:fontFamily="sans-serif-condensed"
-            android:textAppearance="?android:textAppearanceLarge"
+            style="@style/ListViewLargeSizeText"
             android:id="@+id/list_item_high_textview" />
 
         <TextView
@@ -57,7 +57,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
             android:fontFamily="sans-serif-condensed"
-            android:textAppearance="?android:textAppearanceSmall"
+            style="@style/ListViewSmallSizeText"
             android:id="@+id/list_item_low_textview" />
     </LinearLayout>
 
