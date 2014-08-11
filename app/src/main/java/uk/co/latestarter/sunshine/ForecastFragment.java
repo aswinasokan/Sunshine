@@ -41,7 +41,7 @@ public class ForecastFragment extends Fragment implements LoaderManager.LoaderCa
 
     private ListView mListView;
     private ForecastAdapter mForecastAdapter;
-    private int mPosition;
+    private int mPosition = ListView.INVALID_POSITION;
     private final static String SELECTED_KEY = "position_selection";
     private boolean mUseTodayLayout;
 
@@ -197,12 +197,18 @@ public class ForecastFragment extends Fragment implements LoaderManager.LoaderCa
 
     @Override
     public void onLoadFinished(Loader<Cursor> cursorLoader, Cursor data) {
+        // onLoadFinished() is called Twice
+        // TODO: Monitor defect: https://code.google.com/p/android/issues/detail?id=63179
+
         mForecastAdapter.swapCursor(data);
 
         // TODO: Trace the usage of this position being set on Orientation change
         if (ListView.INVALID_POSITION != mPosition) {
+            // Scroll back to previous selection
             mListView.setSelection(mPosition);
         }
+
+        //TODO: Auto-select the today item in the list when launching the app
     }
 
     @Override

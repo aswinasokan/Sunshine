@@ -13,5 +13,6 @@
         android:drawable="@color/sunshine_light_blue"/>
 
     <!-- Default, "just hangin' out" state. -->
+    <!-- TODO: Can this be dynamic based on actual weather condition?-->
     <item android:drawable="@color/sunshine_blue" />
 </selector>

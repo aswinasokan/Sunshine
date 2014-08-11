@@ -52,7 +52,8 @@ public class ForecastAdapter extends CursorAdapter {
         // Read weather icon ID from cursor
         int weatherId = cursor.getInt(ForecastFragment.COL_WEATHER_ART_ID);
 
-        int viewType = getItemViewType(cursor.getPosition());
+        int position = cursor.getPosition();
+        int viewType = getItemViewType(position);
         int resourceId = (viewType == VIEW_TODAY_LAYOUT) ?
                 Utility.getArtResourceForWeatherCondition(weatherId) :
                 Utility.getIconResourceForWeatherCondition(weatherId);
@@ -62,7 +63,10 @@ public class ForecastAdapter extends CursorAdapter {
 
         // Read date from cursor
         String dateString = cursor.getString(ForecastFragment.COL_WEATHER_DATE);
-        holder.dateView.setText(Utility.getFriendlyDayString(context, dateString));
+        String friendlyDateString = (position == 0 && !mUseTodayLayout) ?
+                Utility.getDayName(context, dateString) :
+                Utility.getFriendlyDayString(context, dateString);
+        holder.dateView.setText(friendlyDateString);
 
         // Read weather forecast from cursor
         String description = cursor.getString(ForecastFragment.COL_WEATHER_DESC);
