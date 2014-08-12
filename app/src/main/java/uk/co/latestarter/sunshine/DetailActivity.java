@@ -13,7 +13,7 @@ public class DetailActivity extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_detail_weather);
+        setContentView(R.layout.activity_detail);
 
         if (savedInstanceState == null) {
             String date = getIntent().getStringExtra(DetailActivity.DATE_KEY);

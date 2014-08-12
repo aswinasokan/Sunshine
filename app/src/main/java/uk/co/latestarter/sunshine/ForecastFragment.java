@@ -7,6 +7,7 @@ import android.content.Loader;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -45,6 +46,8 @@ public class ForecastFragment extends Fragment implements LoaderManager.LoaderCa
     private final static String SELECTED_KEY = "position_selection";
     private boolean mUseTodayLayout;
 
+    private final String LOG_TAG = ForecastFragment.class.getSimpleName();
+
     // For the forecast view we're showing only a small subset of the stored data.
     // Specify the columns we need.
     private static final String[] FORECAST_COLUMNS = {
@@ -75,21 +78,32 @@ public class ForecastFragment extends Fragment implements LoaderManager.LoaderCa
 
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
+        Log.v(LOG_TAG, "onActivityCreated()");
         super.onActivityCreated(savedInstanceState);
         getLoaderManager().initLoader(FORECAST_LOADER, null, this);
     }
 
     @Override
     public void onResume() {
+        Log.v(LOG_TAG, "onResume()");
         super.onResume();
         // TODO: When is mLocation used? Check for scenarios
         if (null != mLocation && !mLocation.equals(Utility.getPreferredLocation(getActivity()))) {
             getLoaderManager().restartLoader(FORECAST_LOADER, null, this);
+            return;
         }
+
+        // TODO: Trace the usage of this position being set on Orientation change
+        if (ListView.INVALID_POSITION != mPosition) {
+            // Scroll back to previous selection
+            mListView.setSelection(mPosition);
+        }
+        //TODO: Auto-select the today item in the list when launching the app
     }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
+        Log.v(LOG_TAG, "onCreate()");
         super.onCreate(savedInstanceState);
 
         setHasOptionsMenu(true);
@@ -104,6 +118,7 @@ public class ForecastFragment extends Fragment implements LoaderManager.LoaderCa
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        Log.v(LOG_TAG, "onCreateView()");
 
         View rootView = inflater.inflate(R.layout.fragment_main, container, false);
 
@@ -153,6 +168,8 @@ public class ForecastFragment extends Fragment implements LoaderManager.LoaderCa
 
     @Override
     public void onSaveInstanceState(Bundle outState) {
+        Log.v(LOG_TAG, "onSaveInstanceState()");
+
         super.onSaveInstanceState(outState);
 
         if (ListView.INVALID_POSITION != mPosition) {
@@ -169,6 +186,7 @@ public class ForecastFragment extends Fragment implements LoaderManager.LoaderCa
 
     @Override
     public Loader<Cursor> onCreateLoader(int i, Bundle bundle) {
+        Log.v(LOG_TAG, "onCreateLoader()");
         // This is called when a new Loader needs to be created.  This
         // fragment only uses one loader, so we don't care about checking the id.
 
@@ -197,22 +215,16 @@ public class ForecastFragment extends Fragment implements LoaderManager.LoaderCa
 
     @Override
     public void onLoadFinished(Loader<Cursor> cursorLoader, Cursor data) {
+        Log.v(LOG_TAG, "onLoadFinished()");
         // onLoadFinished() is called Twice
         // TODO: Monitor defect: https://code.google.com/p/android/issues/detail?id=63179
 
         mForecastAdapter.swapCursor(data);
-
-        // TODO: Trace the usage of this position being set on Orientation change
-        if (ListView.INVALID_POSITION != mPosition) {
-            // Scroll back to previous selection
-            mListView.setSelection(mPosition);
-        }
-
-        //TODO: Auto-select the today item in the list when launching the app
     }
 
     @Override
     public void onLoaderReset(Loader<Cursor> cursorLoader) {
+        Log.v(LOG_TAG, "onLoaderReset()");
         mForecastAdapter.swapCursor(null);
     }
 }

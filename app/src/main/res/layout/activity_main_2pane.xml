@@ -25,6 +25,4 @@
         android:layout_height="match_parent"
         android:layout_weight="4" />
 
-    <!-- TODO: Change 7" portraits to use Phone layout-->
-
 </LinearLayout>

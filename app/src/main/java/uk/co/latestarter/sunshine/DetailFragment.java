@@ -109,7 +109,7 @@ public class DetailFragment extends Fragment implements LoaderManager.LoaderCall
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_detail_weather, container, false);
+        View view = inflater.inflate(R.layout.fragment_detail, container, false);
         ViewHolder holder = new ViewHolder(view);
         view.setTag(holder);
         return view;

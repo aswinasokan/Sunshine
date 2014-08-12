@@ -28,11 +28,6 @@
         <item name="android:logo">@drawable/ic_logo</item>
     </style>
 
-    <!-- Adding missing Android style -->
-    <style name="TextAppearance.Micro" parent="@android:style/TextAppearance.Small">
-        <item name="android:textSize">12sp</item>
-    </style>
-
     <style name="ListViewLargeSizeText" parent="AppTheme">
         <item name="android:textAppearance">?android:textAppearanceLarge</item>
     </style>

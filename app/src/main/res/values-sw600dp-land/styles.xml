@@ -1,5 +1,6 @@
 <resources>
 
+    <!-- Selection to be displayed on Wide mode-->
     <style name="ForecastListStyle" parent="AppTheme">
         <item name="android:choiceMode">singleChoice</item>
     </style>
@@ -9,7 +10,7 @@
     </style>
 
     <style name="ListViewSmallSizeText" parent="AppTheme">
-        <item name="android:textSize">@style/TextAppearance.Micro</item>
+        <item name="android:textSize">12sp</item>
     </style>
 
 </resources>

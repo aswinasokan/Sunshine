@@ -10,11 +10,15 @@ import android.view.MenuItem;
 
 public class MainActivity extends Activity implements ForecastFragment.Callback {
 
+    //TODO: Add control centre on left side, showing on swipe to right
+    //TODO: Investigate on Material design
+    //TODO: Add setting to change from Dark & Light Theme
     private final String LOG_TAG = MainActivity.class.getSimpleName();
     private boolean mTwoPane;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        Log.v(LOG_TAG, "onCreate()");
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
