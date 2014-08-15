@@ -55,6 +55,7 @@ public class FetchWeatherTask extends AsyncTask<String, Void, Void> {
         // Will contain the raw JSON response as a string.
         String forecastJsonStr = null;
 
+        // TODO: Change the day count as a setting with min/max spinner
         int days = 14;
         String units="metric";
         String format = "json";
