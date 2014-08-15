@@ -71,17 +71,22 @@ public class ForecastAdapter extends CursorAdapter {
         // Read weather forecast from cursor
         String description = cursor.getString(ForecastFragment.COL_WEATHER_DESC);
         holder.descriptionView.setText(description);
+        holder.descriptionView.setContentDescription(context.getString(R.string.access_forecast) + description + ".");
 
         // Read user preference for metric or imperial temperature units
         boolean isMetric = Utility.isMetric(context);
 
         // Read high temperature from cursor
         float high = cursor.getFloat(ForecastFragment.COL_WEATHER_MAX_TEMP);
-        holder.highView.setText(Utility.formatTemperature(context, high, isMetric));
+        String highText = Utility.formatTemperature(context, high, isMetric);
+        holder.highView.setText(highText);
+        holder.highView.setContentDescription(context.getString(R.string.access_high_temp) + highText + ".");
 
         // Read low temperature from cursor
         float low = cursor.getFloat(ForecastFragment.COL_WEATHER_MIN_TEMP);
-        holder.lowView.setText(Utility.formatTemperature(context, low, isMetric));
+        String lowText = Utility.formatTemperature(context, low, isMetric);
+        holder.lowView.setText(lowText);
+        holder.lowView.setContentDescription(context.getString(R.string.access_low_temp) + lowText + ".");
     }
 
     public void setUseTodayLayout(boolean useTodayLayout) {

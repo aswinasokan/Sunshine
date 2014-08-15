@@ -38,4 +38,9 @@
     <!-- Humidity format CHAR LIMIT=25]-->
     <string name="format_humidity">Humidity: <xliff:g id="humidity">%1.0f</xliff:g> %%</string>
 
+    <!-- Accessibility text -->
+    <string name="access_high_temp">high temperature,</string>
+    <string name="access_low_temp">low temperature,</string>
+    <string name="access_forecast">weather forecast is,</string>
+
 </resources>

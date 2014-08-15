@@ -178,6 +178,7 @@ public class DetailFragment extends Fragment implements LoaderManager.LoaderCall
 
         String weatherDescription = data.getString(data.getColumnIndex(WeatherEntry.COLUMN_SHORT_DESC));
         viewHolder.descriptionView.setText(weatherDescription);
+        viewHolder.descriptionView.setContentDescription(getString(R.string.access_forecast) + weatherDescription + ".");
 
         double humidity = data.getDouble(data.getColumnIndex(WeatherEntry.COLUMN_HUMIDITY));
         viewHolder.humidityView.setText(Utility.getFormattedHumidity(getActivity(), humidity));
