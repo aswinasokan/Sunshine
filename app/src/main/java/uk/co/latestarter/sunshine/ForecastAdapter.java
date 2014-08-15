@@ -49,17 +49,27 @@ public class ForecastAdapter extends CursorAdapter {
         // Get view references from the ViewHolder
         ViewHolder holder = (ViewHolder)view.getTag();
 
+        int position = cursor.getPosition();
+        int viewType = getItemViewType(position);
+
         // Read weather icon ID from cursor
         int weatherId = cursor.getInt(ForecastFragment.COL_WEATHER_ART_ID);
 
-        int position = cursor.getPosition();
-        int viewType = getItemViewType(position);
-        int resourceId = (viewType == VIEW_TODAY_LAYOUT) ?
-                Utility.getArtResourceForWeatherCondition(weatherId) :
-                Utility.getIconResourceForWeatherCondition(weatherId);
+        int weatherResourceId;
 
-        // Use placeholder image for now
-        holder.iconView.setImageResource(resourceId);
+        if (VIEW_TODAY_LAYOUT == viewType) {
+            // Set weather icon id based on layout type
+            weatherResourceId = Utility.getArtResourceForWeatherCondition(weatherId);
+
+            // Set location text
+            holder.locationView.setText(Utility.getPreferredLocation(context));
+        } else {
+            // Set weather icon based on layout type
+            weatherResourceId = Utility.getIconResourceForWeatherCondition(weatherId);
+        }
+
+        // Set weather icon based on layout type
+        holder.iconView.setImageResource(weatherResourceId);
 
         // Read date from cursor
         String dateString = cursor.getString(ForecastFragment.COL_WEATHER_DATE);
@@ -97,6 +107,7 @@ public class ForecastAdapter extends CursorAdapter {
      * Cache of the children views for a forecast list item.
      */
     public static class ViewHolder {
+        public final TextView locationView;
         public final ImageView iconView;
         public final TextView dateView;
         public final TextView descriptionView;
@@ -104,6 +115,7 @@ public class ForecastAdapter extends CursorAdapter {
         public final TextView lowView;
 
         public ViewHolder(View view) {
+            locationView = (TextView) view.findViewById(R.id.list_item_location_textview);
             iconView = (ImageView) view.findViewById(R.id.list_item_icon);
             dateView = (TextView) view.findViewById(R.id.list_item_date_textview);
             descriptionView = (TextView) view.findViewById(R.id.list_item_description_textview);
