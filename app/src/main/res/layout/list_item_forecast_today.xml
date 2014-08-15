@@ -21,6 +21,14 @@
             android:fontFamily="sans-serif-condensed"
             android:textAppearance="?android:textAppearanceLarge"
             android:textColor="@color/white"
+            android:id="@+id/list_item_location_textview"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="sans-serif-condensed"
+            android:textAppearance="?android:textAppearanceLarge"
+            android:textColor="@color/white"
             android:id="@+id/list_item_date_textview"/>
 
         <TextView
