@@ -19,6 +19,7 @@ import android.widget.ShareActionProvider;
 import android.widget.TextView;
 
 import uk.co.latestarter.sunshine.data.WeatherContract.WeatherEntry;
+import uk.co.latestarter.sunshine.view.CompassView;
 
 public class DetailFragment extends Fragment implements LoaderManager.LoaderCallbacks<Cursor> {
 
@@ -189,6 +190,7 @@ public class DetailFragment extends Fragment implements LoaderManager.LoaderCall
         float wind = data.getFloat(data.getColumnIndex(WeatherEntry.COLUMN_WIND_SPEED));
         float degrees = data.getFloat(data.getColumnIndex(WeatherEntry.COLUMN_DEGREES));
         viewHolder.windView.setText(Utility.getFormattedWind(getActivity(), wind, degrees));
+        viewHolder.compassView.updateDirection(degrees);
 
         mForecastStr = String.format("%s - %s - %s/%s",
                 Utility.getFriendlyDayString(getActivity(), dbDate), weatherDescription, high, low);
@@ -212,6 +214,7 @@ public class DetailFragment extends Fragment implements LoaderManager.LoaderCall
         public final TextView humidityView;
         public final TextView windView;
         public final TextView pressureView;
+        public final CompassView compassView;
 
         public ViewHolder(View view) {
             dayView = (TextView) view.findViewById(R.id.detail_day_textview);
@@ -223,6 +226,7 @@ public class DetailFragment extends Fragment implements LoaderManager.LoaderCall
             humidityView = (TextView) view.findViewById(R.id.detail_humidity_textview);
             windView = (TextView) view.findViewById(R.id.detail_wind_textview);
             pressureView = (TextView) view.findViewById(R.id.detail_pressure_textview);
+            compassView = (CompassView) view.findViewById(R.id.detail_wind_compassview);
         }
     }
 }
