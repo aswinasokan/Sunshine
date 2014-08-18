@@ -39,8 +39,8 @@
     <string name="format_humidity">Humidity: <xliff:g id="humidity">%1.0f</xliff:g> %%</string>
 
     <!-- Accessibility text -->
-    <string name="access_high_temp">high temperature,</string>
-    <string name="access_low_temp">low temperature,</string>
-    <string name="access_forecast">weather forecast is,</string>
-
+    <string name="access_high_temp">High temperature is %1$s.</string>
+    <string name="access_low_temp">Low temperature is %1$s.</string>
+    <string name="access_forecast">Weather forecast is %1$s.</string>
+    <string name="access_wind_direction">Wind direction is %1$s.</string>
 </resources>

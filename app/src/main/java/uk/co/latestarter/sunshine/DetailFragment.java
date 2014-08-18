@@ -167,10 +167,14 @@ public class DetailFragment extends Fragment implements LoaderManager.LoaderCall
         boolean isMetric = Utility.isMetric(getActivity());
 
         float high = data.getFloat(data.getColumnIndex(WeatherEntry.COLUMN_MAX_TEMP));
-        viewHolder.highView.setText(Utility.formatTemperature(getActivity(), high, isMetric));
+        String highText = Utility.formatTemperature(getActivity(), high, isMetric);
+        viewHolder.highView.setText(highText);
+        viewHolder.highView.setContentDescription(getString(R.string.access_high_temp, highText));
 
         float low = data.getFloat(data.getColumnIndex(WeatherEntry.COLUMN_MIN_TEMP));
-        viewHolder.lowView.setText(Utility.formatTemperature(getActivity(), low, isMetric));
+        String lowText = Utility.formatTemperature(getActivity(), low, isMetric);
+        viewHolder.lowView.setText(lowText);
+        viewHolder.lowView.setContentDescription(getString(R.string.access_low_temp, lowText));
 
         // Read weather icon ID from cursor
         int weatherId = data.getInt(data.getColumnIndex(WeatherEntry.COLUMN_WEATHER_ID));
@@ -179,7 +183,7 @@ public class DetailFragment extends Fragment implements LoaderManager.LoaderCall
 
         String weatherDescription = data.getString(data.getColumnIndex(WeatherEntry.COLUMN_SHORT_DESC));
         viewHolder.descriptionView.setText(weatherDescription);
-        viewHolder.descriptionView.setContentDescription(getString(R.string.access_forecast) + weatherDescription + ".");
+        viewHolder.descriptionView.setContentDescription(getString(R.string.access_forecast, weatherDescription));
 
         double humidity = data.getDouble(data.getColumnIndex(WeatherEntry.COLUMN_HUMIDITY));
         viewHolder.humidityView.setText(Utility.getFormattedHumidity(getActivity(), humidity));
