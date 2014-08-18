@@ -20,7 +20,7 @@ public class CompassView extends View {
     private Paint indicatorBrush;
     private Paint textBrush;
 
-    private float mDirection;
+    private float mDegrees;
 
     private int mCenterX;
     private int mCenterY;
@@ -165,7 +165,7 @@ public class CompassView extends View {
 
         // Rotate arrow as per direction
         Matrix mMatrix = new Matrix();
-        mMatrix.setRotate(mDirection, mCenterX, mCenterY);
+        mMatrix.setRotate(mDegrees, mCenterX, mCenterY);
         arrow.transform(mMatrix);
 
         canvas.drawPath(arrow, indicatorBrush);
@@ -178,8 +178,8 @@ public class CompassView extends View {
         canvas.drawText("S", mCenterX, (mRimRadius * 2) - mEdge + mPadding, textBrush);
     }
 
-    public void updateDirection(float dir) {
-        mDirection = dir;
+    public void updateDirection(float degrees) {
+        mDegrees = degrees;
         invalidate();
     }
 }

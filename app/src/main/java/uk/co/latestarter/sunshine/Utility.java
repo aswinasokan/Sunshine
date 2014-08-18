@@ -185,6 +185,12 @@ public class Utility {
             windSpeed = .621371192237334f * windSpeed;
         }
 
+        String direction = getFormattedWindDirection(degrees);
+        return String.format(context.getString(windFormat), windSpeed, direction);
+    }
+
+    private static String getFormattedWindDirection(float degrees) {
+        //TODO: Simplify conversion from degree to direction
         // From wind direction in degrees, determine compass direction as a string (e.g NW)
         // You know what's fun, writing really long if/else statements with tons of possible
         // conditions.  Seriously, try it!
@@ -206,8 +212,7 @@ public class Utility {
         } else if (degrees >= 292.5 || degrees < 22.5) {
             direction = "NW";
         }
-
-        return String.format(context.getString(windFormat), windSpeed, direction);
+        return direction;
     }
 
     public static String getFormattedHumidity(Context context, double humidity) {
