@@ -41,6 +41,10 @@
         <provider
             android:authorities="uk.co.latestarter.sunshine"
             android:name=".data.WeatherProvider" />
+
+        <service android:name=".service.WeatherUpdateService"
+            android:label="@string/service_name"/>
+
     </application>
 
 </manifest>

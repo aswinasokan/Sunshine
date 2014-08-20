@@ -2,6 +2,7 @@ package uk.co.latestarter.sunshine;
 
 import android.content.ContentValues;
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 
@@ -11,6 +12,7 @@ import java.util.Calendar;
 import java.util.Date;
 
 import uk.co.latestarter.sunshine.data.WeatherContract;
+import uk.co.latestarter.sunshine.service.WeatherUpdateService;
 
 public class Utility {
 
@@ -291,5 +293,15 @@ public class Utility {
             return R.drawable.art_clouds;
         }
         return -1;
+    }
+
+    public static void updateWeather(Context context) {
+        updateWeather(context, getPreferredLocation(context));
+    }
+
+    public static void updateWeather(Context context, String location) {
+        Intent updateWeatherService = new Intent(context, WeatherUpdateService.class);
+        updateWeatherService.putExtra(WeatherUpdateService.LOCATION_PARAM, location);
+        context.startService(updateWeatherService);
     }
 }

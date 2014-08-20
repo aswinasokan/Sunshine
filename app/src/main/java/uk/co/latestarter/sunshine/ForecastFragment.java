@@ -87,6 +87,7 @@ public class ForecastFragment extends Fragment implements LoaderManager.LoaderCa
     public void onResume() {
         Log.v(LOG_TAG, "onResume()");
         super.onResume();
+
         // TODO: When is mLocation used? Check for scenarios
         if (null != mLocation && !mLocation.equals(Utility.getPreferredLocation(getActivity()))) {
             getLoaderManager().restartLoader(FORECAST_LOADER, null, this);
@@ -98,6 +99,7 @@ public class ForecastFragment extends Fragment implements LoaderManager.LoaderCa
             // Scroll back to previous selection
             mListView.setSelection(mPosition);
         }
+
         //TODO: Auto-select the today item in the list when launching the app
     }
 
@@ -159,7 +161,7 @@ public class ForecastFragment extends Fragment implements LoaderManager.LoaderCa
 
         switch (id) {
             case R.id.action_refresh:
-                new FetchWeatherTask(getActivity()).execute(Utility.getPreferredLocation(getActivity()));
+                Utility.updateWeather(getActivity());
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
