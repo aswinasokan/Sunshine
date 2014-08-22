@@ -1,8 +1,10 @@
 package uk.co.latestarter.sunshine.service;
 
 import android.app.IntentService;
+import android.content.BroadcastReceiver;
 import android.content.ContentUris;
 import android.content.ContentValues;
+import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
 import android.net.Uri;
@@ -29,7 +31,7 @@ import uk.co.latestarter.sunshine.data.WeatherContract;
  */
 public class WeatherUpdateService extends IntentService {
 
-    private final String LOG_TAG = WeatherUpdateService.class.getSimpleName();
+    private static final String LOG_TAG = WeatherUpdateService.class.getSimpleName();
     public static final String LOCATION_PARAM = "location";
 
     public WeatherUpdateService() {
@@ -280,5 +282,15 @@ public class WeatherUpdateService extends IntentService {
 
         cursor.close();
         return locationIndex;
+    }
+
+    static public class AlarmReceiver extends BroadcastReceiver {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            Intent updateWeatherService = new Intent(context, WeatherUpdateService.class);
+            updateWeatherService.putExtra(WeatherUpdateService.LOCATION_PARAM,
+                    intent.getStringExtra(WeatherUpdateService.LOCATION_PARAM));
+            context.startService(updateWeatherService);
+        }
     }
 }

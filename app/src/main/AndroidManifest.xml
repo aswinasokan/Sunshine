@@ -45,6 +45,8 @@
         <service android:name=".service.WeatherUpdateService"
             android:label="@string/service_name"/>
 
+        <receiver android:name=".service.WeatherUpdateService$AlarmReceiver"/>
+
     </application>
 
 </manifest>
