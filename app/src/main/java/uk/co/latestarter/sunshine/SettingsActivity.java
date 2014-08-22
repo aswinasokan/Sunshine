@@ -19,8 +19,7 @@ import uk.co.latestarter.sunshine.data.WeatherContract.WeatherEntry;
  */
 // TODO: Implement PreferenceFragment
 // TODO: Check if warning are cleared
-public class SettingsActivity extends PreferenceActivity
-        implements Preference.OnPreferenceChangeListener {
+public class SettingsActivity extends PreferenceActivity implements Preference.OnPreferenceChangeListener {
 
     private boolean mBindingPreference;
 

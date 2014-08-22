@@ -24,6 +24,7 @@ import uk.co.latestarter.sunshine.data.WeatherContract.LocationEntry;
 import uk.co.latestarter.sunshine.data.WeatherContract.WeatherEntry;
 
 public class ForecastFragment extends Fragment implements LoaderManager.LoaderCallbacks<Cursor> {
+    private static final String LOG_TAG = ForecastFragment.class.getSimpleName();
 
     /**
      * A callback interface that all activities containing this fragment must
@@ -45,8 +46,6 @@ public class ForecastFragment extends Fragment implements LoaderManager.LoaderCa
     private int mPosition = ListView.INVALID_POSITION;
     private final static String SELECTED_KEY = "position_selection";
     private boolean mUseTodayLayout;
-
-    private final String LOG_TAG = ForecastFragment.class.getSimpleName();
 
     // For the forecast view we're showing only a small subset of the stored data.
     // Specify the columns we need.

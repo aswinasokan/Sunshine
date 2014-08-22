@@ -26,8 +26,7 @@ import uk.co.latestarter.sunshine.data.WeatherContract.LocationEntry;
 import uk.co.latestarter.sunshine.data.WeatherContract.WeatherEntry;
 
 public class FetchWeatherTask extends AsyncTask<String, Void, Void> {
-
-    private final String LOG_TAG = FetchWeatherTask.class.getSimpleName();
+    private static final String LOG_TAG = FetchWeatherTask.class.getSimpleName();
 
     private final Context mContext;
 
