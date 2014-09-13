@@ -25,6 +25,7 @@ import uk.co.latestarter.sunshine.data.WeatherContract;
 import uk.co.latestarter.sunshine.data.WeatherContract.LocationEntry;
 import uk.co.latestarter.sunshine.data.WeatherContract.WeatherEntry;
 
+//TODO: Is this class no longer required, after implementing WeatherUpdateService?
 public class FetchWeatherTask extends AsyncTask<String, Void, Void> {
     private static final String LOG_TAG = FetchWeatherTask.class.getSimpleName();
 
