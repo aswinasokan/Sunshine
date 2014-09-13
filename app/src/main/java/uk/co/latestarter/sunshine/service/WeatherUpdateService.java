@@ -23,10 +23,6 @@ public class WeatherUpdateService extends IntentService {
 
     public WeatherUpdateService() {
         super("WeatherUpdateService");
-    }
-
-    @Override
-    public void onCreate() {
         helper = new WeatherProviderHelper(this);
     }
 
