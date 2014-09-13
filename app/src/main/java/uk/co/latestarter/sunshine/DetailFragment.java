@@ -18,6 +18,7 @@ import android.widget.ImageView;
 import android.widget.ShareActionProvider;
 import android.widget.TextView;
 
+import uk.co.latestarter.sunshine.data.WeatherContract;
 import uk.co.latestarter.sunshine.data.WeatherContract.WeatherEntry;
 import uk.co.latestarter.sunshine.view.CompassView;
 
@@ -136,7 +137,8 @@ public class DetailFragment extends Fragment implements LoaderManager.LoaderCall
 
         // Filter the query to return weather only for selected date and location
         mLocation = Utility.getPreferredLocation(getActivity());
-        Uri weatherForLocationUri = WeatherEntry.buildWeatherLocationWithDate(mLocation, weatherDate);
+        Uri weatherForLocationUri = WeatherEntry.buildWeatherLocationWithDate(mLocation,
+                WeatherContract.getDateFromDbString(weatherDate));
 
         // Now create and return a CursorLoader that will take care of
         // creating a Cursor for the data being displayed.

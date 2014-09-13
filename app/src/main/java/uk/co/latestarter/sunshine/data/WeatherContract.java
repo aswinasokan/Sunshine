@@ -78,8 +78,6 @@ public class WeatherContract {
         public static final String COLUMN_COORD_LAT = "coord_lat";
         public static final String COLUMN_COORD_LONG = "coord_long";
 
-
-
         public static Uri buildLocationUri(long id) {
             return ContentUris.withAppendedId(CONTENT_URI, id);
         }
@@ -131,14 +129,14 @@ public class WeatherContract {
             return CONTENT_URI.buildUpon().appendPath(locationSetting).build();
         }
 
-        public static Uri buildWeatherLocationWithStartDate(String locationSetting, String startDate) {
+        public static Uri buildWeatherLocationWithStartDate(String locationSetting, Date startDate) {
             return buildWeatherLocation(locationSetting).buildUpon()
-                    .appendQueryParameter(COLUMN_DATETEXT, startDate).build();
+                    .appendQueryParameter(COLUMN_DATETEXT, getDbDateString(startDate)).build();
         }
 
-        public static Uri buildWeatherLocationWithDate(String locationSetting, String date) {
+        public static Uri buildWeatherLocationWithDate(String locationSetting, Date date) {
             return buildWeatherLocation(locationSetting).buildUpon()
-                    .appendPath(date).build();
+                    .appendPath(getDbDateString(date)).build();
         }
 
         public static String getLocationSettingFromUri(Uri uri) {

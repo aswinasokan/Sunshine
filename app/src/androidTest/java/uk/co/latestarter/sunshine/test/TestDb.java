@@ -6,6 +6,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.test.AndroidTestCase;
 import android.util.Log;
 
+import java.util.Date;
 import java.util.Map;
 import java.util.Set;
 
@@ -18,7 +19,7 @@ public class TestDb extends AndroidTestCase {
     public static final String LOG_TAG = TestDb.class.getSimpleName();
     public static final String TEST_CITY_NAME = "North Pole";
     public static final String TEST_LOCATION = "99705";
-    public static final String TEST_DATE = "20141205";
+    public static final Date TEST_DATE = new Date();
 
     public void testCreateDb() throws Throwable {
 

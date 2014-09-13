@@ -106,17 +106,15 @@ public class TestProvider extends AndroidTestCase {
         // vnd.android.cursor.dir/uk.co.latestarter.sunshine/weather
         assertEquals(WeatherEntry.CONTENT_DIR_TYPE, type);
 
-        String testLocation = "94074";
         // content://uk.co.latestarter.sunshine/weather/94074
         type = mContext.getContentResolver().getType(
-                WeatherEntry.buildWeatherLocation(testLocation));
+                WeatherEntry.buildWeatherLocation(TestDb.TEST_LOCATION));
         // vnd.android.cursor.dir/uk.co.latestarter.sunshine/weather
         assertEquals(WeatherEntry.CONTENT_DIR_TYPE, type);
 
-        String testDate = "20140612";
         // content://uk.co.latestarter.sunshine/weather/94074/20140612
         type = mContext.getContentResolver().getType(
-                WeatherEntry.buildWeatherLocationWithDate(testLocation, testDate));
+                WeatherEntry.buildWeatherLocationWithDate(TestDb.TEST_LOCATION, TestDb.TEST_DATE));
         // vnd.android.cursor.item/uk.co.latestarter.sunshine/weather
         assertEquals(WeatherEntry.CONTENT_ITEM_TYPE, type);
 

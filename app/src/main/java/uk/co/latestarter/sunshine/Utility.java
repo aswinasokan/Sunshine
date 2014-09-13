@@ -15,6 +15,8 @@ import java.util.Calendar;
 import java.util.Date;
 
 import uk.co.latestarter.sunshine.data.WeatherContract;
+import uk.co.latestarter.sunshine.data.WeatherContract.LocationEntry;
+import uk.co.latestarter.sunshine.data.WeatherContract.WeatherEntry;
 import uk.co.latestarter.sunshine.service.WeatherUpdateService;
 
 public class Utility {
@@ -43,29 +45,30 @@ public class Utility {
         // Create a new map of values, where column names are the keys
         ContentValues values = new ContentValues();
 
-        values.put(WeatherContract.LocationEntry.COLUMN_LOCATION_SETTING, locationSetting);
-        values.put(WeatherContract.LocationEntry.COLUMN_CITY_NAME, cityName);
-        values.put(WeatherContract.LocationEntry.COLUMN_COORD_LAT, cityLatitude);
-        values.put(WeatherContract.LocationEntry.COLUMN_COORD_LONG, cityLongitude);
+        values.put(LocationEntry.COLUMN_LOCATION_SETTING, locationSetting);
+        values.put(LocationEntry.COLUMN_CITY_NAME, cityName);
+        values.put(LocationEntry.COLUMN_COORD_LAT, cityLatitude);
+        values.put(LocationEntry.COLUMN_COORD_LONG, cityLongitude);
 
         return values;
     }
 
-    public static ContentValues createWeatherValues(long locationRowId, String date, String description,
-                                                    int id, double humidity, double pressure, double speed, double degrees, double min, double max) {
+    public static ContentValues createWeatherValues(long locationId, Date dateTime, String description,
+                                                    int weatherId, double humidity, double pressure,
+                                                    double windSpeed, double windDirection,
+                                                    double min, double max) {
         // Create a new map of values, where column names are the keys
         ContentValues values = new ContentValues();
-
-        values.put(WeatherContract.WeatherEntry.COLUMN_LOC_KEY, locationRowId);
-        values.put(WeatherContract.WeatherEntry.COLUMN_DATETEXT, date);
-        values.put(WeatherContract.WeatherEntry.COLUMN_SHORT_DESC, description);
-        values.put(WeatherContract.WeatherEntry.COLUMN_WEATHER_ID, id);
-        values.put(WeatherContract.WeatherEntry.COLUMN_HUMIDITY, humidity);
-        values.put(WeatherContract.WeatherEntry.COLUMN_PRESSURE, pressure);
-        values.put(WeatherContract.WeatherEntry.COLUMN_WIND_SPEED, speed);
-        values.put(WeatherContract.WeatherEntry.COLUMN_DEGREES, degrees);
-        values.put(WeatherContract.WeatherEntry.COLUMN_MIN_TEMP, min);
-        values.put(WeatherContract.WeatherEntry.COLUMN_MAX_TEMP, max);
+        values.put(WeatherEntry.COLUMN_LOC_KEY, locationId);
+        values.put(WeatherEntry.COLUMN_DATETEXT, WeatherContract.getDbDateString(dateTime));
+        values.put(WeatherEntry.COLUMN_SHORT_DESC, description);
+        values.put(WeatherEntry.COLUMN_WEATHER_ID, weatherId);
+        values.put(WeatherEntry.COLUMN_HUMIDITY, humidity);
+        values.put(WeatherEntry.COLUMN_PRESSURE, pressure);
+        values.put(WeatherEntry.COLUMN_WIND_SPEED, windSpeed);
+        values.put(WeatherEntry.COLUMN_DEGREES, windDirection);
+        values.put(WeatherEntry.COLUMN_MIN_TEMP, min);
+        values.put(WeatherEntry.COLUMN_MAX_TEMP, max);
 
         return values;
     }

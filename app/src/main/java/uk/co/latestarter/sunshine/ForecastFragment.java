@@ -19,7 +19,6 @@ import android.widget.ListView;
 
 import java.util.Date;
 
-import uk.co.latestarter.sunshine.data.WeatherContract;
 import uk.co.latestarter.sunshine.data.WeatherContract.LocationEntry;
 import uk.co.latestarter.sunshine.data.WeatherContract.WeatherEntry;
 
@@ -195,10 +194,10 @@ public class ForecastFragment extends Fragment implements LoaderManager.LoaderCa
         // To only show current and future dates, get the String representation for today,
         // and filter the query to return weather only for dates after or including today.
         // Only return data after today.
-        String startDate = WeatherContract.getDbDateString(new Date());
+        Date today = new Date();
 
         mLocation = Utility.getPreferredLocation(getActivity());
-        Uri weatherForLocationUri = WeatherEntry.buildWeatherLocationWithStartDate(mLocation, startDate);
+        Uri weatherForLocationUri = WeatherEntry.buildWeatherLocationWithStartDate(mLocation, today);
 
         // Sort order:  Ascending, by date.
         String sortOrder = WeatherEntry.COLUMN_DATETEXT + " ASC";
