@@ -7,7 +7,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
-import android.provider.AlarmClock;
 import android.util.Log;
 
 import java.text.ParseException;
@@ -316,6 +315,6 @@ public class Utility {
         updateWeatherIntent.putExtra(WeatherUpdateService.LOCATION_PARAM, location);
 
         PendingIntent pendingIntent = PendingIntent.getBroadcast(context, 0, updateWeatherIntent, PendingIntent.FLAG_ONE_SHOT);
-        alarmManager.set(AlarmManager.RTC_WAKEUP, System.currentTimeMillis() + 5000, pendingIntent);
+        alarmManager.set(AlarmManager.RTC_WAKEUP, System.currentTimeMillis() + 2000, pendingIntent);
     }
 }
