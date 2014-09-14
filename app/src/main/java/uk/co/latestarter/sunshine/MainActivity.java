@@ -8,6 +8,8 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import uk.co.latestarter.sunshine.sync.SunshineSyncAdapter;
+
 public class MainActivity extends Activity implements ForecastFragment.Callback {
 
     //TODO: Add control centre on left side, showing on swipe to right
@@ -39,6 +41,8 @@ public class MainActivity extends Activity implements ForecastFragment.Callback 
 
         ForecastFragment forecastFragment = ((ForecastFragment)getFragmentManager().findFragmentById(R.id.fragment_forecast));
         forecastFragment.setUseTodayLayout(!mTwoPane);
+
+        SunshineSyncAdapter.initializeSyncAdapter(this);
     }
 
     @Override

@@ -4,6 +4,11 @@
     <string name="app_name">Sunshine</string>
     <string name="service_name">Sunshine Weather Update Service</string>
 
+    <!-- Account type (for sync-adapter authenticator) -->
+    <!-- SyncAdapter related -->
+    <string name="sync_account_type">sunshine.latestarter.co.uk</string>
+    <string name="content_authority">uk.co.latestarter.sunshine</string>
+
     <string name="action_share">Share</string>
     <string name="action_refresh">Refresh</string>
     <string name="action_view_location_on_map">View on map</string>

@@ -1,13 +1,9 @@
 package uk.co.latestarter.sunshine;
 
-import android.app.AlarmManager;
-import android.app.PendingIntent;
 import android.content.ContentValues;
 import android.content.Context;
-import android.content.Intent;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
-import android.util.Log;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -17,10 +13,10 @@ import java.util.Date;
 import uk.co.latestarter.sunshine.data.WeatherContract;
 import uk.co.latestarter.sunshine.data.WeatherContract.LocationEntry;
 import uk.co.latestarter.sunshine.data.WeatherContract.WeatherEntry;
-import uk.co.latestarter.sunshine.service.WeatherUpdateService;
+import uk.co.latestarter.sunshine.sync.SunshineSyncAdapter;
 
 public class Utility {
-    private static final String LOG_TAG = Utility.class.getSimpleName();
+//    private static final String LOG_TAG = Utility.class.getSimpleName();
 
     public static String getPreferredLocation(Context context) {
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
@@ -308,16 +304,18 @@ public class Utility {
 
     public static void updateWeather(Context context, String location) {
 
-        AlarmManager alarmManager = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
-        if (null == alarmManager) {
-            Log.e(LOG_TAG, "Could not get AlarmManager");
-            return;
-        }
+//        AlarmManager alarmManager = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
+//        if (null == alarmManager) {
+//            Log.e(LOG_TAG, "Could not get AlarmManager");
+//            return;
+//        }
+//
+//        Intent updateWeatherIntent = new Intent(context, WeatherUpdateService.AlarmReceiver.class);
+//        updateWeatherIntent.putExtra(WeatherUpdateService.LOCATION_PARAM, location);
+//
+//        PendingIntent pendingIntent = PendingIntent.getBroadcast(context, 0, updateWeatherIntent, PendingIntent.FLAG_ONE_SHOT);
+//        alarmManager.set(AlarmManager.RTC_WAKEUP, System.currentTimeMillis() + 2000, pendingIntent);
 
-        Intent updateWeatherIntent = new Intent(context, WeatherUpdateService.AlarmReceiver.class);
-        updateWeatherIntent.putExtra(WeatherUpdateService.LOCATION_PARAM, location);
-
-        PendingIntent pendingIntent = PendingIntent.getBroadcast(context, 0, updateWeatherIntent, PendingIntent.FLAG_ONE_SHOT);
-        alarmManager.set(AlarmManager.RTC_WAKEUP, System.currentTimeMillis() + 2000, pendingIntent);
+        SunshineSyncAdapter.syncImmediately(context);
     }
 }
