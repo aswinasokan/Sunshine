@@ -2,7 +2,6 @@ package uk.co.latestarter.sunshine.api.openweathermap;
 
 import android.content.ContentValues;
 import android.net.Uri;
-import android.util.Log;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -21,7 +20,7 @@ import uk.co.latestarter.sunshine.api.DataFetcher;
  */
 public class OpenWeatherMapApi extends DataFetcher {
 
-    private static final String LOG_TAG = OpenWeatherMapApi.class.getSimpleName();
+//    private static final String LOG_TAG = OpenWeatherMapApi.class.getSimpleName();
 
     // These are the names of the JSON objects that need to be extracted.
     // Location information
@@ -66,7 +65,7 @@ public class OpenWeatherMapApi extends DataFetcher {
                 .appendQueryParameter(UNITS_PARAM, units)
                 .appendQueryParameter(DAYS_PARAM, Integer.toString(days))
                 .build();
-        Log.v(LOG_TAG, "Built URI: " + builtUri.toString());
+//        Log.v(LOG_TAG, "Built URI: " + builtUri.toString());
 
         URL url = new URL(builtUri.toString());
 
@@ -85,7 +84,7 @@ public class OpenWeatherMapApi extends DataFetcher {
         double cityLatitude = coordJSON.getLong(OWM_COORD_LAT);
         double cityLongitude = coordJSON.getLong(OWM_COORD_LONG);
 
-        Log.v(LOG_TAG, cityName + ", with coord: " + cityLatitude + " " + cityLongitude);
+//        Log.v(LOG_TAG, cityName + ", with coord: " + cityLatitude + " " + cityLongitude);
 
         return Utility.createLocationValues(location, cityName, cityLatitude, cityLongitude);
     }

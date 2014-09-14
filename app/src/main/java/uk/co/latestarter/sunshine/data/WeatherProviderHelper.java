@@ -5,13 +5,12 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.net.Uri;
-import android.util.Log;
 
 import java.util.Vector;
 
 public class WeatherProviderHelper {
 
-    private static final String LOG_TAG = WeatherProviderHelper.class.getSimpleName();
+//    private static final String LOG_TAG = WeatherProviderHelper.class.getSimpleName();
 
     private final Context mContext;
 
@@ -23,7 +22,7 @@ public class WeatherProviderHelper {
         ContentValues[] cvArray = new ContentValues[cVVector.size()];
         cVVector.toArray(cvArray);
 
-        Log.v(LOG_TAG, "Bulk insert of weather data");
+//        Log.v(LOG_TAG, "Bulk insert of weather data");
         mContext.getContentResolver().bulkInsert(WeatherContract.WeatherEntry.CONTENT_URI, cvArray);
     }
 
@@ -40,10 +39,10 @@ public class WeatherProviderHelper {
         long locationIndex;
         if (cursor.moveToFirst()) {
             // Already present in database, extract the ID
-            Log.v(LOG_TAG, "Found location in the database");
+//            Log.v(LOG_TAG, "Found location in the database");
             locationIndex = cursor.getLong(cursor.getColumnIndex(WeatherContract.LocationEntry._ID));
         } else {
-            Log.v(LOG_TAG, "Didn't find location in the database, inserting now");
+//            Log.v(LOG_TAG, "Didn't find location in the database, inserting now");
             Uri uri = mContext.getContentResolver().insert(WeatherContract.LocationEntry.CONTENT_URI, locationValues);
             locationIndex = ContentUris.parseId(uri);
         }

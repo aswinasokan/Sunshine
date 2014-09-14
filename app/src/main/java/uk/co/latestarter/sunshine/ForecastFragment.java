@@ -7,7 +7,6 @@ import android.content.Loader;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -23,7 +22,7 @@ import uk.co.latestarter.sunshine.data.WeatherContract.LocationEntry;
 import uk.co.latestarter.sunshine.data.WeatherContract.WeatherEntry;
 
 public class ForecastFragment extends Fragment implements LoaderManager.LoaderCallbacks<Cursor> {
-    private static final String LOG_TAG = ForecastFragment.class.getSimpleName();
+//    private static final String LOG_TAG = ForecastFragment.class.getSimpleName();
 
     /**
      * A callback interface that all activities containing this fragment must
@@ -77,14 +76,14 @@ public class ForecastFragment extends Fragment implements LoaderManager.LoaderCa
 
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
-        Log.v(LOG_TAG, "onActivityCreated()");
+//        Log.v(LOG_TAG, "onActivityCreated()");
         super.onActivityCreated(savedInstanceState);
         getLoaderManager().initLoader(FORECAST_LOADER, null, this);
     }
 
     @Override
     public void onResume() {
-        Log.v(LOG_TAG, "onResume()");
+//        Log.v(LOG_TAG, "onResume()");
         super.onResume();
 
         // TODO: When is mLocation used? Check for scenarios
@@ -104,7 +103,7 @@ public class ForecastFragment extends Fragment implements LoaderManager.LoaderCa
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
-        Log.v(LOG_TAG, "onCreate()");
+//        Log.v(LOG_TAG, "onCreate()");
         super.onCreate(savedInstanceState);
 
         setHasOptionsMenu(true);
@@ -119,7 +118,7 @@ public class ForecastFragment extends Fragment implements LoaderManager.LoaderCa
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        Log.v(LOG_TAG, "onCreateView()");
+//        Log.v(LOG_TAG, "onCreateView()");
 
         View rootView = inflater.inflate(R.layout.fragment_main, container, false);
 
@@ -169,7 +168,7 @@ public class ForecastFragment extends Fragment implements LoaderManager.LoaderCa
 
     @Override
     public void onSaveInstanceState(Bundle outState) {
-        Log.v(LOG_TAG, "onSaveInstanceState()");
+//        Log.v(LOG_TAG, "onSaveInstanceState()");
 
         super.onSaveInstanceState(outState);
 
@@ -187,7 +186,7 @@ public class ForecastFragment extends Fragment implements LoaderManager.LoaderCa
 
     @Override
     public Loader<Cursor> onCreateLoader(int i, Bundle bundle) {
-        Log.v(LOG_TAG, "onCreateLoader()");
+//        Log.v(LOG_TAG, "onCreateLoader()");
         // This is called when a new Loader needs to be created.  This
         // fragment only uses one loader, so we don't care about checking the id.
 
@@ -216,7 +215,7 @@ public class ForecastFragment extends Fragment implements LoaderManager.LoaderCa
 
     @Override
     public void onLoadFinished(Loader<Cursor> cursorLoader, Cursor data) {
-        Log.v(LOG_TAG, "onLoadFinished()");
+//        Log.v(LOG_TAG, "onLoadFinished()");
         // onLoadFinished() is called Twice
         // TODO: Monitor defect: https://code.google.com/p/android/issues/detail?id=63179
 
@@ -225,7 +224,7 @@ public class ForecastFragment extends Fragment implements LoaderManager.LoaderCa
 
     @Override
     public void onLoaderReset(Loader<Cursor> cursorLoader) {
-        Log.v(LOG_TAG, "onLoaderReset()");
+//        Log.v(LOG_TAG, "onLoaderReset()");
         mForecastAdapter.swapCursor(null);
     }
 }

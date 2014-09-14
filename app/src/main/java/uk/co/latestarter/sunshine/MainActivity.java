@@ -18,7 +18,7 @@ public class MainActivity extends Activity implements ForecastFragment.Callback 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        Log.v(LOG_TAG, "onCreate()");
+//        Log.v(LOG_TAG, "onCreate()");
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
