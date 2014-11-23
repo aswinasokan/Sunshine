@@ -69,9 +69,17 @@ public class Utility {
         return values;
     }
 
-    public static String formatTemperature(Context context, double temperature, boolean isMetric) {
+    /**
+     * Helper method to convert the temperature to FARENHEIT based on user preference and format
+     * to polished text.
+     *
+     * @param context Context to use for resource localization
+     * @param temperature The temperature to be optionally converted and formatted
+     * @return a user-friendly representation of the temperature
+     */
+    public static String formatTemperature(Context context, double temperature) {
         double temp;
-        if ( !isMetric ) {
+        if ( !isMetric(context) ) {
             temp = 9*temperature/5+32;
         } else {
             temp = temperature;

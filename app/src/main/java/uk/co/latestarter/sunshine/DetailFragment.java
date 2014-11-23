@@ -165,16 +165,13 @@ public class DetailFragment extends Fragment implements LoaderManager.LoaderCall
         viewHolder.dayView.setText(Utility.getDayName(getActivity(), dbDate));
         viewHolder.dateView.setText(Utility.getFormattedMonthDay(dbDate));
 
-        // Read user preference for metric or imperial temperature units
-        boolean isMetric = Utility.isMetric(getActivity());
-
         float high = data.getFloat(data.getColumnIndex(WeatherEntry.COLUMN_MAX_TEMP));
-        String highText = Utility.formatTemperature(getActivity(), high, isMetric);
+        String highText = Utility.formatTemperature(getActivity(), high);
         viewHolder.highView.setText(highText);
         viewHolder.highView.setContentDescription(getString(R.string.access_high_temp, highText));
 
         float low = data.getFloat(data.getColumnIndex(WeatherEntry.COLUMN_MIN_TEMP));
-        String lowText = Utility.formatTemperature(getActivity(), low, isMetric);
+        String lowText = Utility.formatTemperature(getActivity(), low);
         viewHolder.lowView.setText(lowText);
         viewHolder.lowView.setContentDescription(getString(R.string.access_low_temp, lowText));
 
