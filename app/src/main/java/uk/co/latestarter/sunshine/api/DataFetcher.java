@@ -1,7 +1,5 @@
 package uk.co.latestarter.sunshine.api;
 
-import org.apache.http.NoHttpResponseException;
-
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
@@ -33,7 +31,7 @@ public class DataFetcher {
             StringBuilder buffer = new StringBuilder();
             if (inputStream == null) {
                 // Nothing to do.
-                throw new NoHttpResponseException("Null InputStream");
+                throw new IOException("Null InputStream");
             }
             reader = new BufferedReader(new InputStreamReader(inputStream));
 
@@ -44,7 +42,7 @@ public class DataFetcher {
 
             if (buffer.length() == 0) {
                 // Stream was empty.  No point in parsing.
-                throw new NoHttpResponseException("Empty response from server");
+                throw new IOException("Empty response from server");
             }
 
             return buffer.toString();
